@@ -4,7 +4,7 @@ var User = require("../model/User").User;
 exports.addUser = function(user, next) {
     bcrypt.hash(user.password, 10, function(err, hash) {
         if(err) {
-            return next(err);
+            return next(err); 
         }
         
         var newUser = new User({
