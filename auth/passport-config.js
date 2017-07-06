@@ -7,7 +7,7 @@ module.exports = function() {
     passport.use(new passportLocal.Strategy({usernameField: 'email'}, function(email, password, next) {
         userService.findUser(email, function(err, user) {
             if(err) {
-                return next(err);
+                return next(err); 
             }
             if(!user) {
                 return next(null, null);
