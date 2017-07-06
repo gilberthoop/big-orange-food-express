@@ -9,6 +9,6 @@ router.get('/', restrict, function(req, res, next) {
         firstName: req.user ? req.user.firstName : null
     }
     res.render('orders/index', vm);
-});
+});  
 
 module.exports = router;
