@@ -22,7 +22,7 @@ userSchema.path('email').validate(function(value, next) {
 }, "That email has been in use.")
 
 var User = mongoose.model('User', userSchema);
-
+ 
 module.exports = {
     User: User
 };

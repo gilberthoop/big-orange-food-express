@@ -1,4 +1,4 @@
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcrypt");  
 var User = require("../model/User").User;
 
 exports.addUser = function(user, next) {
