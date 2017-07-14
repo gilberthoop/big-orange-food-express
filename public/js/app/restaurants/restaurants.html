@@ -1,31 +1,24 @@
-<div class="textwidget margin-top-30">
-    <p><em><strong>Restaurant to Room</strong></em> is for demonstration use only!
-    <br>The website does not request the restaurants listed below to deliver food to the hotel.
-</p>
-</div>
 <div class="widget">
     
     <strong ng-show="!restCtrl.restaurants">Loading...</strong>
     
-    <h1 ng-show="restCtrl.restaurants">Here are the nearby restaurants in {{restCtrl.restaurants.location.title}}</h1>
+    <h1 ng-show="restCtrl.restaurants">Here are the restaurants in {{restCtrl.restaurants.address.city}}, {{restCtrl.restaurants.address.state}}</h1>
     
     <ul>
-        <li ng-repeat="each in restCtrl.restaurants.nearby_restaurants">
-            <strong><a href="#/menu/">{{each.restaurant.name}}</a></strong>
+        <li ng-repeat="restaurant in restCtrl.restaurants.restaurants">
+            <strong><a href="#/menu/">{{restaurant.name}}</a></strong>
             <ul>
-                <li><strong>Cuisines:</strong> {{each.restaurant.cuisines}}</li>
-                <li><strong>Address:</strong> {{each.restaurant.location.address}}</li>
-                <li>
-                    <strong>Ratings:</strong> 
-                    {{each.restaurant.user_rating.aggregate_rating}} - {{each.restaurant.user_rating.rating_text}}
+                <li><strong>Specialties:</strong> 
+                    <em ng-repeat = "food in restaurant.foodTypes">{{food}}, </em>
+                </li> 
+                <li><strong>Address:</strong> 
+                    {{restaurant.streetAddress}} {{restaurant.city}}, {{restaurant.state}} {{restaurant.zip}}
                 </li>
-                <li><strong><a ng-href={{each.restaurant.url}} target="_blank">Click here for more details</a></strong></li>
+                <li><strong>Phone: </strong>{{restaurant.phone}}</li>
+                <li><strong>Delivery time: </strong>{{restaurant.deliveryMin}} minutes</li>
+                <br>
             </ul>
         </li>
     </ul>
-    
-    <h2>
-        <a ng-show="restCtrl.restaurants" ng-href={{restCtrl.restaurants.link}} target="_blank">Click here to see more restaurants in {{restCtrl.restaurants.location.title}}
-    </h2>
     
 </div>
