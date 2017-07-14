@@ -12,6 +12,7 @@
     "connect-mongo": "^1.3.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
+    "eatstreet": "0.0.2",
     "express": "~4.13.4",
     "express-session": "^1.15.3",
     "hbs": "~4.0.0",
