@@ -1,15 +1,14 @@
 <div class="widget">
-    
     <strong ng-show="!restCtrl.restaurants">Loading...</strong>
     
     <h1 ng-show="restCtrl.restaurants">Here are the restaurants in {{restCtrl.restaurants.address.city}}, {{restCtrl.restaurants.address.state}}</h1>
-    
+
     <ul>
         <li ng-repeat="restaurant in restCtrl.restaurants.restaurants">
-            <strong><a href="#/menu/">{{restaurant.name}}</a></strong>
+            <strong><a ng-href="#/menu/{{restaurant.apiKey}}">{{restaurant.name}}</a></strong>
             <ul>
                 <li><strong>Specialties:</strong> 
-                    <em ng-repeat = "food in restaurant.foodTypes">{{food}}, </em>
+                    <span ng-repeat = "food in restaurant.foodTypes">,&nbsp;&nbsp;{{food}}</span>
                 </li> 
                 <li><strong>Address:</strong> 
                     {{restaurant.streetAddress}} {{restaurant.city}}, {{restaurant.state}} {{restaurant.zip}}
