@@ -3,7 +3,8 @@ var config = require("../config");
 var EatStreet = require("eatstreet");
 
 var ES = new EatStreet("4721fc0b973460d9");
-var params = { 'address': 'Los Angeles, CA' };
+var restParams = { 'address': 'Los Angeles, CA' };
+var menuParams = { 'apiKey': '90fd4587554469b1f15b4f2e73e761809f4b4bcca52eedca' };
 
 /*
  Link to the eatstreet API: 
@@ -11,13 +12,23 @@ var params = { 'address': 'Los Angeles, CA' };
 */
 
 exports.getRestaurants = function(next) {
-    ES.SearchRestaurants(params, function(err, result) {
+    ES.SearchRestaurants(restParams, function(err, res) {
         if(err) {
             return next(err);
         }
-        // Pass result when no errors
-        next(null, result);
-    })
+        
+        next(null, res);
+    });
+}
+
+exports.getRestaurantMenu = function(resKey, next) {
+    ES.RestaurantMenu({apiKey: resKey}, function(err, res) {
+        if(err) {
+            console.log(err);
+        } 
+        
+        next(null, res);
+    });  
 }
 
 
