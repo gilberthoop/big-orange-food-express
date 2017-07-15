@@ -1,0 +1,14 @@
+<div class="textwidget margin-top-30">
+    <h1>{{restCtrl.restaurants.address.city}}</h1>
+</div>
+<div class="widget">
+    <strong ng-show="!menuCtrl.restaurant">Loading...</strong>
+    <div class="category" ng-repeat="category in menuCtrl.restaurant">
+        <h2>{{category.name}}</h2>
+        <ul>
+            <li ng-repeat="item in category.items">
+                <a href="#"><strong>{{item.name}}</strong></a> - ${{item.basePrice}}: <em>{{item.description}}</em>
+            </li>
+        </ul>
+    </div>
+</div>

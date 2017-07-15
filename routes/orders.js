@@ -1,10 +1,13 @@
-var express = require('express');
-var zomato = require("zomato");
+var express = require('express'); 
 var router = express.Router();
 var restrict = require("../auth/restrict");
 var orderService = require("../services/order-service"); 
 
 router.get('/', restrict, function(req, res, next) {
+    if(!req.isAuthenticated()) {
+        return res.redirect('/');
+    }
+    
     var vm = { 
         title: 'Place an order.', 
         orderId: req.session.orderId,
@@ -21,5 +24,14 @@ router.get('/api/restaurants', restrict, function(req, res, next) {
         res.json(restaurants);
     });
 }); 
+
+router.get('/api/restaurant-menu/:restKey', function(req, res, next) {
+    orderService.getRestaurantMenu(req.params.restKey, function(err, menu) {
+        if(err) {
+            return res.status(500).json({error:'Failed to retrieve restaurant menu'});
+        }
+        res.json(menu);
+    });
+})
 
 module.exports = router;
