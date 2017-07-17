@@ -19,6 +19,11 @@
                 controller: 'MenuController',
                 controllerAs: 'menuCtrl'
             })
+            .when('/payment', {
+                templateUrl: '/js/app/payment/payment.html',
+                controller: 'PaymentController',
+                controllerAs: 'paymentCtrl'
+            })
             .otherwise({redirectTo: '/restaurants'});
             
         $locationProvider.hashPrefix('');
