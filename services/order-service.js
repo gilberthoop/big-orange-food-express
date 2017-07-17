@@ -1,6 +1,6 @@
-var zomato = require("zomato");
 var config = require("../config");
 var EatStreet = require("eatstreet");
+var Order = require("../model/Order").Order;
 
 var ES = new EatStreet("4721fc0b973460d9");
 var restParams = { 'address': 'Los Angeles, CA' };
@@ -31,4 +31,16 @@ exports.getRestaurantMenu = function(resKey, next) {
     });  
 }
 
-
+exports.createOrder = function(user, food, next) {
+    var order = new Order({
+        user: user,
+        food: food
+    });
+    
+    order.save(function(err, savedOrder) {
+        if(!err) {
+            return next(null, savedOrder._id);
+        }
+        next(err);
+    });
+};
