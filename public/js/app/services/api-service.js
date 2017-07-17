@@ -11,7 +11,8 @@
     function apiFactory($http) {
         return {
             getRestaurants: getRestaurants,
-            getRestaurantMenu: getRestaurantMenu
+            getRestaurantMenu: getRestaurantMenu,
+            createOrder: createOrder
         };
         
         function getRestaurants() {
@@ -26,6 +27,13 @@
                 .then(function(response) {
                     return response.data;
                 });
+        }
+        
+        function createOrder(food) {
+            return $http.post('/orders/api/create-order', food)
+                .then(function(response) {
+                    return response.data;
+                }); 
         }
     }
     
