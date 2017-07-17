@@ -13,7 +13,6 @@ var orderSchema = new Schema({
     },
     food: {
         restId: String,
-        restName: String,
         items: []
     }
 });
