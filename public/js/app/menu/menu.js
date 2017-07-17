@@ -30,6 +30,7 @@
             });
         }
         
+        
         self.toggleOption = function(option) {
             var index = self.activeItem.options.indexOf(option);
             
@@ -41,16 +42,17 @@
             self.activeItem.options.push(option);
         };
         
+        
         self.addItem = function(item) {
             var newItem = {
-                id: item.id,
+                id: item.apiKey,
                 name: item.name,
-                price: item.price
+                price: item.basePrice
             };
             
             if(item.options.length > 0) {
                 newItem.options = item.options.map(function(item) {
-                    return {id: item.id, name: item.name, price: item.price};
+                    return {id: item.apiKey, name: item.name, price: item.basePrice};
                 });
             }
             
@@ -59,13 +61,28 @@
             console.log(self.items);
         }
         
+        
         self.cancel = function() {
             ngDialog.close();
         }
         
+        
         self.checkOut = function() {
-            $location.url('/payment');
-        }
+            var food = {
+                restId: $routeParams.restKey,
+                items: self.items
+            };
+            
+            api.createOrder(food)
+                .then(function(data) {
+                    if(data.success) {
+                        return $location.url('/payment');
+                        console.log('success');
+                    }
+                    alert('Something went wrong.');
+                    console.log('fail');
+                });
+        };
     }
     
 }());
