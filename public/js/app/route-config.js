@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute'])
+        .module('app', ['ngRoute', 'ngDialog'])
         .config(config)
 
     config.$inject = ['$routeProvider', '$locationProvider'];
@@ -22,6 +22,5 @@
             .otherwise({redirectTo: '/restaurants'});
             
         $locationProvider.hashPrefix('');
-    }
-    
+    } 
 }());
