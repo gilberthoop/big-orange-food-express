@@ -3,12 +3,33 @@
 </div>
 <div class="widget">
     <strong ng-show="!menuCtrl.restaurant">Loading...</strong>
+    <input type="submit" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
+    
     <div class="category" ng-repeat="category in menuCtrl.restaurant">
         <h2>{{category.name}}</h2>
         <ul>
             <li ng-repeat="item in category.items">
-                <a href="#"><strong>{{item.name}}</strong></a> - ${{item.basePrice}}: <em>{{item.description}}</em>
+                <strong ng-click="menuCtrl.viewItem(item)" style="cursor:pointer;">{{item.name}}</strong>
+                - <span>${{item.basePrice}}</span>: 
+                <em>{{item.description}}</em>
             </li>
         </ul>
     </div>
 </div>
+
+<script type="text/ng-template" id="item.html">
+    <h1 ng-bind="menuCtrl.activeItem.name"></h1>
+    
+    <div ng-repeat="optionType in menuCtrl.activeItem.children">
+        <strong ng-bind="optionType.name"></strong>
+        <ul>
+            <li ng-repeat="option in optionType.children">
+                <input type="checkbox" ng-click="menuCtrl.toggleOption(option)">
+                <span ng-bind="option.name + ' - ' + option.price">
+            </li>
+        </ul>
+    </div>
+    
+    <button ng-click="menuCtrl.addItem(menuCtrl.activeItem)">Add to order</button>
+    <button ng-click="menuCtrl.cancel()">Cancel</button>
+</script>
