@@ -24,6 +24,9 @@
                 controller: 'PaymentController',
                 controllerAs: 'paymentCtrl'
             })
+            .when('/confirmation', {
+                templateUrl: '/js/app/confirmation/confirmation.html'
+            })
             .otherwise({redirectTo: '/restaurants'});
             
         $locationProvider.hashPrefix('');
