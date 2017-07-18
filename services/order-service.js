@@ -16,7 +16,6 @@ exports.getRestaurants = function(next) {
         if(err) {
             return next(err);
         }
-        
         next(null, res);
     });
 }
@@ -26,7 +25,6 @@ exports.getRestaurantMenu = function(resKey, next) {
         if(err) {
             console.log(err);
         } 
-        
         next(null, res);
     });  
 }
@@ -44,3 +42,33 @@ exports.createOrder = function(user, food, next) {
         next(err);
     });
 };
+
+exports.prepareTray = function(items) {
+    var tray = [];
+    
+    for(var i=0; i<items.length; i++) {
+        var trayItem = items[i].apiKey + '/1';
+        tray.push(trayItem);
+    }
+    
+    return tray.join('+');
+};
+
+exports.placeOrder = function(order_id, card, next) {
+    var self = this;
+    
+    Order.findOne({_id: order_id}, function(err, order) {
+        if(err) {
+            console.log(err);
+            return next(err);
+        }
+        var args = {
+            rid: order.food.restId,
+            em: order.user.email,
+            tray: self.prepareTray(order.food.items),
+            first_name: order.user.firstName,
+            last_name: order.user.lastName,
+        };
+        console.log('Delivery on the way!');
+    });
+}
