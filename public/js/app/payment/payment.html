@@ -2,7 +2,7 @@
     <h1>Payment Information</h1>
 </div>
 <div class="widget">
-    <form method="post" name="paymentForm" novalidate>
+    <form method="post" name="paymentForm" novalidate ng-submit="paymentForm.$valid && paymentCtrl.submit()">
         <div class="form-group">
             <label for="cardType">Card type</label>
             <select name="cardType" id="cardType">
@@ -55,10 +55,11 @@
         </div>
         <div class="form-group">
             <label for="zip">Billing zip</label>
-            <input type="text" name="zip" id="zip" />
+            <input type="text" name="zip" id="zip" required/>
         </div>
         <div>
-            <input type="submit" value="Place Order" />
+            <input type="submit" value="Place Order" /> 
+            <span ng-show="paymentCtrl.showProgress">Placing order...</span>
         </div>
         <div ng-show="paymentForm.$submitted" style="color:red;">
             <div ng-show="paymentForm.cardNumber.$error.required">Please enter your credit card number.</div>
