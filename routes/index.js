@@ -6,6 +6,8 @@ router.get('/', function(req, res, next) {
     if(req.user) {
         return res.redirect('/orders');
     }
+    
+    console.log("Log in failed")
     var vm = {
         title: 'Log in',
         error: req.flash('error')
