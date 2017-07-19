@@ -9,7 +9,7 @@ var orderSchema = new Schema({
         firstName: String,
         lastName: String,
         email: String,
-        roomNumber: Number
+        address: String
     },
     food: {
         restId: String,
