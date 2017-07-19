@@ -3,10 +3,13 @@
 </div>
 <div class="widget">
     <strong ng-show="!menuCtrl.restaurant">Loading...</strong>
-    <input type="submit" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
-    
+    <button type="submit" class="ui orange labeled icon button" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
+        <i class="cart icon"></i>Checkout
+    </button> 
+    <hr> 
     <div class="category" ng-repeat="category in menuCtrl.restaurant">
-        <h2>{{category.name}}</h2>
+        <br>
+        <h1>{{category.name}}</h1>
         <ul>
             <li ng-repeat="item in category.items">
                 <strong ng-click="menuCtrl.viewItem(item)" style="cursor:pointer;">{{item.name}}</strong>
@@ -17,8 +20,10 @@
     </div>
 </div>
 
-<script type="text/ng-template" id="item.html">
-    <h1 ng-bind="menuCtrl.activeItem.name"></h1>
+<script type="text/ng-template" id="item.html"> 
+    <h3>
+        {{menuCtrl.activeItem.name}} - ${{menuCtrl.activeItem.basePrice}}.00
+    </h3>
     
     <div ng-repeat="optionType in menuCtrl.activeItem.children">
         <strong ng-bind="optionType.name"></strong>

@@ -203,8 +203,8 @@ article.format-status footer.entry-meta {
 }
 
 /* Form fields, general styles first */
-button,
-input,
+/*button,
+input,*/
 textarea,
 select {
 	border: 1px solid #ccc;
@@ -213,10 +213,10 @@ select {
 	padding: 6px;
 	padding: 0.428571429rem;
 }
-button,
+/*button,
 input {
 	line-height: normal;
-}
+}*/
 textarea {
 	font-size: 100%;
 	overflow: auto;
@@ -224,7 +224,7 @@ textarea {
 }
 
 /* Reset non-text input types */
-input[type="checkbox"],
+/*input[type="checkbox"],
 input[type="radio"],
 input[type="file"],
 input[type="hidden"],
@@ -233,9 +233,10 @@ input[type="color"] {
 	border: 0;
 	border-radius: 0;
 	padding: 0;
-}
+}*/
 
 /* Buttons */
+/*
 .menu-toggle,
 input[type="submit"],
 input[type="button"],
@@ -312,6 +313,7 @@ input[type="reset"]:active {
 	box-shadow: none;
 	padding: 0;
 }
+*/
 
 /* Responsive images */
 .entry-content img,
@@ -758,7 +760,7 @@ article.sticky .featured-post {
 .comment-content h1 {
 	font-size: 21px;
 	font-size: 1.5rem;
-	line-height: 1.5;
+	line-height: 1.2;
 }
 .entry-content h2,
 .comment-content h2,

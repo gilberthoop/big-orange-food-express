@@ -13,6 +13,8 @@
         
         self.items = [];
         
+        $scope.hasCheckedOut = "llll";
+        
         api.getRestaurantMenu($routeParams.restKey)
             .then(function(data) {
                 self.restaurant = data;
@@ -81,7 +83,7 @@
                     }
                     alert('Something went wrong.');
                     console.log('fail');
-                });
+                }); 
         };
     }
     

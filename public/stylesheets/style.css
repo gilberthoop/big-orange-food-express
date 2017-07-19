@@ -80,11 +80,19 @@ color: #602e8b;
 /* =Change colors-- */
 
 .entry-content h1,
-.comment-content h1 {
-	font-size: 21px;
-	font-size: 1.5rem;
-	line-height: 1.5;
-        color:  #602e8b;
+.comment-content h1 { 
+	font-size: 2.8rem;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: normal;
+    color:  #ff6600;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 15px;
+    text-align: center;
+  }
 }
 
 /* Change menu drop down hover color. This is from the section called "Minimum width of 600 pixels", not the main navigation menu. */
@@ -96,23 +104,26 @@ color: #602e8b;
 
 /* Change hover states from the section called "Body, links, basics" */
 
-a:link {
+a.api:link {
 	outline: none;
-	color: #21759b;
+	color: green;
 }
-a:visited {
-	color: #a8add7;
+a.api:visited {
+	color: green;
 }
 
-a:hover {
-	color: #a8add7; 
+a.api:hover {
+	color: #ff6600; 
 text-decoration: underline;
 }
 
-a:active {
-color: #a8add7; 
+a.api:active {
+color: green; 
 }
 
+a.api {
+	color: green;
+}
 
 /* Change hover states from the section called "Main content and comment content" */
 
@@ -194,3 +205,13 @@ form label {
 .margin-top-30 {
 	margin-top:30px;
 }
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 

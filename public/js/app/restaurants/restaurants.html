@@ -1,23 +1,19 @@
 <div class="widget">
     <strong ng-show="!restCtrl.restaurants">Loading...</strong>
-    
+
     <h1 ng-show="restCtrl.restaurants">Here are the restaurants in {{restCtrl.restaurants.address.city}}, {{restCtrl.restaurants.address.state}}</h1>
 
-    <ul>
-        <li ng-repeat="restaurant in restCtrl.restaurants.restaurants">
-            <strong><a ng-href="#/menu/{{restaurant.apiKey}}">{{restaurant.name}}</a></strong>
-            <ul>
-                <li><strong>Specialties:</strong> 
-                    <span ng-repeat = "food in restaurant.foodTypes">,&nbsp;&nbsp;{{food}}</span>
-                </li> 
-                <li><strong>Address:</strong> 
-                    {{restaurant.streetAddress}} {{restaurant.city}}, {{restaurant.state}} {{restaurant.zip}}
-                </li>
-                <li><strong>Phone: </strong>{{restaurant.phone}}</li>
-                <li><strong>Delivery time: </strong>{{restaurant.deliveryMin}} minutes</li>
-                <br>
-            </ul>
-        </li>
-    </ul>
-    
+    <div ng-repeat="restaurant in restCtrl.restaurants.restaurants">
+        <strong><a ng-href="#/menu/{{restaurant.apiKey}}" class="ui inverted orange button">{{restaurant.name}}</a></strong>
+        <ul>
+            <li><strong>Specialties:</strong>
+                <span ng-repeat="food in restaurant.foodTypes">,&nbsp;&nbsp;{{food}}</span>
+            </li>
+            <li><strong>Address:</strong> {{restaurant.streetAddress}} {{restaurant.city}}, {{restaurant.state}} {{restaurant.zip}}
+            </li>
+            <li><strong>Phone: </strong>{{restaurant.phone}}</li>
+            <li><strong>Delivery time: </strong>{{restaurant.deliveryMin}} minutes</li> 
+        </ul>
+    </div>
+
 </div>

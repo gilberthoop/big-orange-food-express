@@ -1,9 +1,10 @@
 <div class="textwidget margin-top-30">
-    <p>No matter what you're craving, <em><strong>Restaurant to Room</strong></em> has you covered. Our fast and friendly delivery service brings you hot, fresh food, from a diverse choice of local restaurants.</p>
+    <h1>Create an account</h1>
     <p>Simply create an account to get started, select items from a menu, and we'll have food delivered directly to your room, within an hour, or your meal is free. The only difficult part is choosing. (Sorry, we can't help you with that.)</p>
 </div>
+<hr>
 <div class="widget">
-    <form name="create-user-form" id="create-user-form" method="POST">
+    <form class="ui form" name="create-user-form" id="create-user-form" method="POST">
         <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" id="firstName" name="firstName" required value="{{input.firstName}}" />
@@ -24,9 +25,14 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" autocomplete="off" required value="{{input.password}}" />
         </div>
-        <div class="form-submit">
-            <input type="submit" value="Create my account" />
-        </div>
+        <input class="ui green inverted button" type="submit" value="Create my account" />
+        <hr>
+        <p>Already have an account? <a href="/" class="ui orange inverted button" data-vivaldi-spatnav-clickable="1">Log in here.</a></p>
+        {{!--<div class="form-submit ui buttons">--}}
+        {{!--    <input class="ui green inverted button" type="submit" value="Create my account" />--}}
+        {{!--    <div class="or"></div>--}}
+        {{!--    <a href="/" class="ui violet inverted button">Login</a>--}}
+        {{!--</div>--}}
         <span style="color:red">{{error}}</span>
     </form>
 </div>

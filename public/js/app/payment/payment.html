@@ -1,64 +1,63 @@
 <div class="textwidget margin-top-30">
-    <h1>Payment Information</h1>
+    <h1>Billing Information</h1>
+    <hr>
 </div>
-<div class="widget">
-    <form method="post" name="paymentForm" novalidate ng-submit="paymentForm.$valid && paymentCtrl.submit()">
-        <div class="form-group">
+<div class="widget field">
+    <form class="ui form" method="post" name="paymentForm" novalidate ng-submit="paymentForm.$valid && paymentCtrl.submit()">
+        <div class="form-group field">
             <label for="cardType">Card type</label>
-            <select name="cardType" id="cardType">
-														<option value=""></option>
-														<option value="visa">Visa</option>
-														<option value="master">MasterCard</option>
-														<option value="amex">American Express</option>
-														<option value="discover">Discover</option>														
-													</select>
+            <select name="cardType" id="cardType" required>
+				<option value="" disabled selected>-------</option>
+				<option value="visa"><i class="visa icon"></i>Visa</option>
+				<option value="master"><i class="master icon"></i>MasterCard</option>
+				<option value="amex"><i class="amex icon"></i>American Express</option>
+				<option value="discover"><i class="discover icon"></i>Discover</option>														
+			</select>
         </div>
-        <div class="form-group">
-            <label for="cardNumber">Card number</label>
-            <input type="text" name="cardNumber" id="cardNumber" ng-model="paymentCtrl.cardNumber" required credit-card />
+        <div class="fields">
+            <div class="form-group seven wide field">
+                <label for="cardNumber">Card number</label>
+                <input type="text" name="cardNumber" id="cardNumber" placeholder="Card #" ng-model="paymentCtrl.cardNumber" required credit-card />
+            </div>
+            <div class="form-group three wide field">
+                <label for="cardCode">CVC</label>
+                <input type="text" name="cardCode" id="cardCode" placeholder="CVC" ng-model="paymentCtrl.cardCode" ng-minlength="3" ng-maxlength="4" />
+            </div>
+            <div class="form-group six wide field">
+                <label for="expirationMonth">Expiration</label>
+                <div class="two fields">
+                    <div class="field">
+                        <select class="ui fluid search dropdown" name="expirationMonth" id="expirationMonth">
+                            <option value="" disabled selected>Month</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <input type="text" name="expirationYear" maxlength="4" placeholder="Year" required>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="cardCode">Security code</label>
-            <input type="text" name="cardCode" id="cardCode" ng-model="paymentCtrl.cardCode" ng-minlength="3" ng-maxlength="4" />
-        </div>
-        <div class="form-group">
-            <label for="expirationMonth">Expiration</label>
-            <select name="expirationMonth" id="expirationMonth">
-														<option value=""></option>
-														<option value="01">01</option>
-														<option value="02">02</option>
-														<option value="03">03</option>
-														<option value="04">04</option>
-														<option value="05">05</option>
-														<option value="06">06</option>
-														<option value="07">07</option>
-														<option value="08">08</option>
-														<option value="09">09</option>
-														<option value="10">10</option>
-														<option value="11">11</option>
-														<option value="12">12</option>
-													</select> /
-            <select name="expirationYear">
-														<option value=""></option>
-														<option value="2015">2015</option>
-														<option value="2016">2016</option>
-														<option value="2017">2017</option>
-														<option value="2018">2018</option>
-														<option value="2019">2019</option>
-														<option value="2020">2020</option>
-														<option value="2021">2021</option>
-														<option value="2022">2022</option>
-														<option value="2023">2023</option>
-														<option value="2024">2024</option>
-														<option value="2025">2025</option>
-													</select>
-        </div>
-        <div class="form-group">
+        <div class="form-group six wide field">
             <label for="zip">Billing zip</label>
-            <input type="text" name="zip" id="zip" required/>
+            <input type="text" name="zip" id="zip" placeholder="ZIP" required/>
         </div>
         <div>
-            <input type="submit" value="Place Order" /> 
+            <button type="submit" class="ui orange labeled icon button" value="Place Order">
+                <i class="checkmark icon"></i>Place Order
+            </button>
+
             <span ng-show="paymentCtrl.showProgress">Placing order...</span>
         </div>
         <div ng-show="paymentForm.$submitted" style="color:red;">
