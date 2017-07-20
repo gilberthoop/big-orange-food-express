@@ -1,11 +1,14 @@
-<div class="textwidget margin-top-30">
-    <!--<h1>{{restCtrl.restaurants.address.city}}</h1>-->
-</div>
 <div class="widget">
     <strong ng-show="!menuCtrl.restaurant">Loading...</strong>
     <button type="submit" class="ui orange labeled icon button" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
         <i class="cart icon"></i>Checkout
-    </button> 
+    </button>  
+    <p></p>
+    <ul>
+        <li ng-repeat="item in menuCtrl.items">
+            <strong>{{item.name}}:</strong> ${{item.price}}
+        </li>
+    </ul>
     <hr> 
     <div class="category" ng-repeat="category in menuCtrl.restaurant">
         <br>
@@ -37,4 +40,4 @@
     
     <button ng-click="menuCtrl.addItem(menuCtrl.activeItem)">Add to order</button>
     <button ng-click="menuCtrl.cancel()">Cancel</button>
-</script>
+</script> 

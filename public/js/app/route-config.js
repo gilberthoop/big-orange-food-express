@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngDialog'])
+        .module('app', ['ngRoute', 'ngDialog', 'ngMaterial'])
         .config(config)
 
     config.$inject = ['$routeProvider', '$locationProvider'];
