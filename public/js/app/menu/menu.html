@@ -1,33 +1,42 @@
-<div class="widget">
-    <strong ng-show="!menuCtrl.restaurant">Loading...</strong>
+<div class="textwidget margin-top-30">
+    <h1>Order number: {{orderId}}</h1>
+    <a ng-click="back()" class="ui button">Back</a>
+    <a ng-click="forward()" ng-show="historyLength() > 2" class="ui button">Next</a>
+    <br><strong ng-show="!menuCtrl.restaurant">Loading...</strong>
+    <h1>Menu</h1>
+
     <button type="submit" class="ui orange labeled icon button" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
         <i class="cart icon"></i>Checkout
-    </button>  
+    </button>
     <p></p>
+    <strong>Your order summary:</strong>
     <ul>
         <li ng-repeat="item in menuCtrl.items">
             <strong>{{item.name}}:</strong> ${{item.price}}
         </li>
     </ul>
-    <hr> 
+    <hr>
+</div>
+
+<div class="widget">
+
     <div class="category" ng-repeat="category in menuCtrl.restaurant">
         <br>
         <h1>{{category.name}}</h1>
         <ul>
             <li ng-repeat="item in category.items">
-                <strong ng-click="menuCtrl.viewItem(item)" style="cursor:pointer;">{{item.name}}</strong>
-                - <span>${{item.basePrice}}</span>: 
+                <strong ng-click="menuCtrl.viewItem(item)" style="cursor:pointer;">{{item.name}}</strong> - <span>${{item.basePrice}}</span>:
                 <em>{{item.description}}</em>
             </li>
         </ul>
     </div>
 </div>
 
-<script type="text/ng-template" id="item.html"> 
+<script type="text/ng-template" id="item.html">
     <h3>
         {{menuCtrl.activeItem.name}} - ${{menuCtrl.activeItem.basePrice}}
     </h3>
-    
+
     <div ng-repeat="optionType in menuCtrl.activeItem.children">
         <strong ng-bind="optionType.name"></strong>
         <ul>
@@ -40,4 +49,4 @@
     
     <button ng-click="menuCtrl.addItem(menuCtrl.activeItem)">Add to order</button>
     <button ng-click="menuCtrl.cancel()">Cancel</button>
-</script> 
+</script>

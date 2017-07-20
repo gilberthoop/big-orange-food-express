@@ -1,4 +1,6 @@
 <div class="widget">
+    <a ng-click="forward()" ng-show="historyLength() > 1" class="ui button">Next</a>
+    <br>
     <strong ng-show="!restCtrl.restaurants">Loading...</strong>
 
     <h1 ng-show="restCtrl.restaurants">Here are the restaurants in {{restCtrl.restaurants.address.city}}, {{restCtrl.restaurants.address.state}}</h1>
