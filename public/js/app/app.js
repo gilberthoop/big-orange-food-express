@@ -1,9 +1,17 @@
 'use strict';
 
 angular
-    .module('app', ['ngRoute', 'ngDialog'])
-    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-        $routeProvider.otherwise({redirectTo: '/restaurants'});
+    .module('app')
+    .run(['$rootScope', '$window', function($rootScope, $window) {
+        $rootScope.back = function() {
+            $window.history.back();
+        }
         
-        $locationProvider.hashPrefix('');
-    }]);
+        $rootScope.forward = function() {
+            $window.history.forward();
+        }
+        
+        $rootScope.historyLength = function() {
+            return $window.history.length;
+        }
+    }])
