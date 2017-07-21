@@ -48,7 +48,6 @@ router.post('/api/create-order', restrict, function(req, res, next) {
 router.post('/api/place-order', restrict, function(req, res, next) {
     orderService.placeOrder(req.session.order_id, req.body, function(err, res) {
         if(err) {
-            console.log("ERRRORORORRO PAYMENT NOT RECEIVED")
             return res.status(500).json({ error: 'Failed to place order' });
         }
         res.json(res);
