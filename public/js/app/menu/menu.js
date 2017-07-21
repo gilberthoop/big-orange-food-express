@@ -63,8 +63,13 @@
             }
 
             self.items.push(newItem);
-            ngDialog.close();
+            ngDialog.close(); 
             console.log(self.items);
+            
+            // Update total price of items
+            for (var i = 0; i < self.items.length; i++) {
+                self.total += self.items[i].price;
+            }
         }
 
 
@@ -76,11 +81,6 @@
         self.checkOut = function() {
             var orderOk = false;
             
-            // Calculate the total price of all items
-            for (var i = 0; i < self.items.length; i++) {
-                self.total += self.items[i].price;
-            }
-
             // Pop up a confirm dialog for the total price upon check out 
             if (confirm("Your total is: $" + self.total +". Proceed to payment?") == true) {
                 orderOk = true;
@@ -98,20 +98,13 @@
                     if (data.success && orderOk) {
                         return $location.url('/payment');
                         console.log('success');
-                    } 
-                    // Reset total price
-                    self.total = 0;
+                    }  
                     console.log('fail');
                 }); 
         };
 
 
         $scope.showConfirm = function(ev) { 
-            // Calculate the total price of all items
-            for (var i = 0; i < self.items.length; i++) {
-                self.total += self.items[i].price;
-            }
-            
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Confirm order?')  
