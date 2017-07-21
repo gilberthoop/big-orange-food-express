@@ -7,11 +7,11 @@ router.get('/', restrict, function(req, res, next) {
     if(!req.isAuthenticated()) {
         return res.redirect('/');
     }
-    
+    req.session.restId = " ";
     var vm = { 
         title: 'Place an order.', 
         orderId: req.session.orderId,
-        items: req.session.items,
+        restId: req.session.restId,   
         firstName: req.user ? req.user.firstName : null
     }
     res.render('orders/index', vm);
@@ -40,17 +40,15 @@ router.post('/api/create-order', restrict, function(req, res, next) {
         if(err) {
             return res.status(500).json({ error: 'Failed to create order' });
         }
-        
         req.session.order_id = orderId;
         res.json({ success: true });
     });
-    
-        console.log("order created")
 });
 
 router.post('/api/place-order', restrict, function(req, res, next) {
     orderService.placeOrder(req.session.order_id, req.body, function(err, res) {
         if(err) {
+            console.log("ERRRORORORRO PAYMENT NOT RECEIVED")
             return res.status(500).json({ error: 'Failed to place order' });
         }
         res.json(res);

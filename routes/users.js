@@ -38,8 +38,7 @@ router.post('/create', function(req, res, next) {
 
 
 router.post('/login', function(req, res, next) {
-        req.session.orderId = 12345;
-        req.session.items = ['pizza', 'wings', 'coke'];
+        req.session.orderId = 12345; 
         if (req.body.rememberMe) {
             req.session.cookie.maxAge = config.cookieMaxAge;
         }
