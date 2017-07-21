@@ -1,5 +1,8 @@
 <div class="textwidget margin-top-30">
-    <h1>Order number: {{orderId}}</h1>
+    <!--<md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex="100" flex-gt-md="auto">-->
+    <!--    Check out-->
+    <!--</md-button>-->
+    <br>
     <a ng-click="back()" class="ui button">Back</a>
     <a ng-click="forward()" ng-show="historyLength() > 3" class="ui button">Next</a>
     <br><strong ng-show="!menuCtrl.restaurant">Loading...</strong>

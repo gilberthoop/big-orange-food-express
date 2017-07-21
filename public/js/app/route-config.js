@@ -5,8 +5,9 @@
         .module('app', ['ngRoute', 'ngDialog', 'ngMaterial'])
         .config(config)
 
+
     config.$inject = ['$routeProvider', '$locationProvider'];
-    
+
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/restaurants', {
@@ -27,8 +28,11 @@
             .when('/confirmation', {
                 templateUrl: '/js/app/confirmation/confirmation.html'
             })
-            .otherwise({redirectTo: '/restaurants'});
-            
+            .otherwise({
+                redirectTo: '/restaurants'
+            });
+
         $locationProvider.hashPrefix('');
-    } 
+    }
+
 }());

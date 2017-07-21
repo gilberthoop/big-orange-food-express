@@ -11,6 +11,7 @@ router.get('/', restrict, function(req, res, next) {
     var vm = { 
         title: 'Place an order.', 
         orderId: req.session.orderId,
+        items: req.session.items,
         firstName: req.user ? req.user.firstName : null
     }
     res.render('orders/index', vm);
@@ -22,7 +23,7 @@ router.get('/api/restaurants', restrict, function(req, res, next) {
             return res.status(500).json({error:'Failed to retrieve restaurants.'});
         }
         res.json(restaurants);
-    });
+    }); 
 }); 
 
 router.get('/api/restaurant-menu/:restKey', function(req, res, next) {
@@ -43,6 +44,8 @@ router.post('/api/create-order', restrict, function(req, res, next) {
         req.session.order_id = orderId;
         res.json({ success: true });
     });
+    
+        console.log("order created")
 });
 
 router.post('/api/place-order', restrict, function(req, res, next) {
