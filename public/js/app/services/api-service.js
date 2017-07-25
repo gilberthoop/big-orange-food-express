@@ -13,6 +13,7 @@
             getRestaurants: getRestaurants,
             getRestaurantMenu: getRestaurantMenu,
             createOrder: createOrder,
+            clearOrder: clearOrder,
             placeOrder: placeOrder
         };
         
@@ -32,6 +33,13 @@
         
         function createOrder(food) {
             return $http.post('/orders/api/create-order', food)
+                .then(function(response) {
+                    return response.data;
+                }); 
+        }
+        
+        function clearOrder(order_id) {
+            return $http.post('/orders/api/create-order', order_id)
                 .then(function(response) {
                     return response.data;
                 }); 
