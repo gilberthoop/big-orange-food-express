@@ -20,6 +20,7 @@ exports.getRestaurants = function(next) {
     });
 }
 
+
 exports.getRestaurantMenu = function(resKey, next) {
     ES.RestaurantMenu({apiKey: resKey}, function(err, res) {
         if(err) {
@@ -29,19 +30,26 @@ exports.getRestaurantMenu = function(resKey, next) {
     });  
 }
 
+
 exports.createOrder = function(user, food, next) {
-    var order = new Order({
+    this.order = new Order({
         user: user,
         food: food
     });
     
-    order.save(function(err, savedOrder) {
+    this.order.save(function(err, savedOrder) {
         if(!err) {
             return next(null, savedOrder._id);
         }
         next(err);
     });
 };
+
+
+exports.clearOrder = function(order_id) {
+    this.order.find({id:order_id}).remove().exec();
+};
+
 
 exports.prepareTray = function(items) {
     var tray = [];
@@ -53,6 +61,7 @@ exports.prepareTray = function(items) {
     
     return tray.join('+');
 };
+
 
 exports.placeOrder = function(order_id, card, next) {
     var self = this;
@@ -71,4 +80,4 @@ exports.placeOrder = function(order_id, card, next) {
         };
         console.log('Delivery on the way!');
     });
-}
+};

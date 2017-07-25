@@ -1,17 +1,24 @@
 <div class="textwidget margin-top-30"> 
     <a ng-click="back()" class="ui button">Back</a>
-    <a ng-click="forward()" ng-show="historyLength() > 3" class="ui button">Next</a>
+    <!--<a ng-click="forward()" ng-show="historyLength() > 3" class="ui button">Next</a>-->
     <br><strong ng-show="!menuCtrl.restaurant">Loading...</strong>
     <h1>Menu</h1>
-
+    <div>
+        <strong>Note: </strong>Refreshing the browser or going to a different page will erase your order list. 
+        However, in case of page reloads, the list of your previous orders is displayed for your reference.<br> 
+        <strong>Don't worry! </strong> Your orders will not be added to the database until you proceed to the checkout.<br>
+    </div>
+    <p></p>
     <button type="submit" class="ui orange labeled icon button" value="Checkout" ng-show="menuCtrl.items.length > 0" ng-click="menuCtrl.checkOut()">
         <i class="cart icon"></i>Checkout
     </button>
     <p></p>
+    <div id="prevOrders"></div>
+    <p></p>
     <strong>Your order summary:</strong>
     <ul>
         <li ng-repeat="item in menuCtrl.items">
-            <strong>{{item.name}}:</strong> ${{item.price}}
+            <strong>{{item.name}}</strong> -> ${{item.price}}
         </li>
     </ul>
     <hr>

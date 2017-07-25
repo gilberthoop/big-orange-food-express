@@ -9,7 +9,7 @@
     MenuController.$inject = ['api', '$routeParams', 'ngDialog', '$scope', '$location', '$mdDialog'];
 
     function MenuController(api, $routeParams, ngDialog, $scope, $location, $mdDialog) {
- 
+
         var self = this;
         self.items = [];
         self.total = 0;
@@ -46,31 +46,29 @@
 
 
         self.addItem = function(item) {
-            var newItem = {
-                id: item.apiKey,
-                name: item.name,
-                price: item.basePrice
-            };
+                var newItem = {
+                    id: item.apiKey,
+                    name: item.name,
+                    price: item.basePrice
+                };
 
-            if (item.options.length > 0) {
-                newItem.options = item.options.map(function(item) {
-                    return {
-                        id: item.apiKey,
-                        name: item.name,
-                        price: item.basePrice
-                    };
-                });
-            }
+                self.items.push(newItem);
+                ngDialog.close();
+                console.log(self.items);
 
-            self.items.push(newItem);
-            ngDialog.close(); 
-            console.log(self.items);
+                // Store the item in the session storage
+                sessionStorage.setItem("savedOrders", JSON.stringify(self.items));
+
+                var price = 0;
+                // Update total price of items
+                for (var i = 0; i < self.items.length; i++) {
+                    price += self.items[i].price;
+                }
+                self.total = Math.round(price * 100) / 100;
+            }  
             
-            // Update total price of items
-            for (var i = 0; i < self.items.length; i++) {
-                self.total += self.items[i].price;
-            }
-        }
+        // Display previous orders for reference
+        document.getElementById("prevOrders").innerHTML = '<strong>Previous orders: </strong><br>' + sessionStorage.savedOrders || '   ' + '<br>';
 
 
         self.cancel = function() {
@@ -78,43 +76,49 @@
         }
 
 
-        self.checkOut = function() {
-            var orderOk = false;
-            
-            // Pop up a confirm dialog for the total price upon check out 
-            if (confirm("Your total is: $" + self.total +". Proceed to payment?") == true) {
-                orderOk = true;
-            } else {
-                alert("Order cancelled.");
-            } 
-            
+        self.checkOut = function() { 
+
             var food = {
                 restId: $routeParams.restKey,
                 items: self.items
             };
-
-            api.createOrder(food)
-                .then(function(data) {
-                    if (data.success && orderOk) {
-                        return $location.url('/payment');
-                        console.log('success');
-                    }  
-                    console.log('fail');
-                }); 
+            
+            // Pop up a confirm dialog for the total price upon check out 
+            if (confirm("Your total is: $" + self.total + ". Proceed to payment?") == true) {
+                /*
+                    If the order is confirmed,
+                        create the order
+                        add the order to the database
+                        proceed to the payment view
+                */
+                api.createOrder(food)
+                    .then(function(data) {
+                        if (data.success) {
+                            return $location.url('/payment');
+                            console.log('success');
+                        }
+                        console.log('fail');
+                    });
+            }
+            else {
+                // Else alert the user and do nothing
+                alert("Order cancelled.");
+            }
+            
         };
 
 
-        $scope.showConfirm = function(ev) { 
+        $scope.showConfirm = function(ev) {
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
-                .title('Confirm order?')  
+                .title('Confirm order?')
                 .textContent('Your total is ' + self.total)
                 .ariaLabel('Lucky day')
                 .targetEvent(ev)
                 .ok('Confirm')
-                .cancel('Cancel'); 
-            
-            $mdDialog.show(confirm); 
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm);
         };
     }
 
