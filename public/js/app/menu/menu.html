@@ -14,12 +14,12 @@
     </button>
     <p></p>
     <strong>Previous orders: </strong><br>
-    <ul id="prevOrders"></ul>
+    <ul id="prevOrders" style="color:gray;"></ul>
     <p></p>
     <strong>Your order summary:</strong>
     <ul style="list-style: none;">
         <li ng-repeat="item in menuCtrl.items">
-            <span><i class="fa fa-trash" style="color:red;"></i></span>&nbsp; <strong>{{item.name}}</strong>: ${{item.price}}
+            <span><i class="fa fa-check" style="color:red;"></i></span>&nbsp; <strong>{{item.name}}</strong>: ${{item.price}}
         </li>
     </ul>
     <hr>
