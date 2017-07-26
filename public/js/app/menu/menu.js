@@ -46,29 +46,38 @@
 
 
         self.addItem = function(item) {
-                var newItem = {
-                    id: item.apiKey,
-                    name: item.name,
-                    price: item.basePrice
-                };
+            var newItem = {
+                id: item.apiKey,
+                name: item.name,
+                price: item.basePrice
+            };
 
-                self.items.push(newItem);
-                ngDialog.close();
-                console.log(self.items);
+            self.items.push(newItem);
+            ngDialog.close();
 
-                // Store the item in the session storage
-                sessionStorage.setItem("savedOrders", JSON.stringify(self.items));
+            // Store the item in the session storage
+            sessionStorage.savedOrders = JSON.stringify(self.items);
 
-                var price = 0;
-                // Update total price of items
-                for (var i = 0; i < self.items.length; i++) {
-                    price += self.items[i].price;
-                }
-                self.total = Math.round(price * 100) / 100;
-            }  
+            var price = 0;
+            // Update total price of items
+            for (var i = 0; i < self.items.length; i++) {
+                price += self.items[i].price;
+            }
+            self.total = Math.round(price * 100) / 100;
+        }
+
+        if (sessionStorage.savedOrders != null) {
+            // Convert string to object format of session storage containing the orders
+            var ordersObject = JSON.parse(sessionStorage.savedOrders);
             
-        // Display previous orders for reference
-        document.getElementById("prevOrders").innerHTML = '<strong>Previous orders: </strong><br>' + sessionStorage.savedOrders || '   ' + '<br>';
+            // If order array is not empty, display previous orders for reference in a list
+            if (ordersObject.length > 0) {
+                for (var i = 0; i < ordersObject.length; i++) {
+                    document.getElementById("prevOrders").innerHTML +=
+                        '<li><strong>' + ordersObject[i].name + ":</strong> $" + ordersObject[i].price || '   ' + '<li>';
+                }
+            }
+        }
 
 
         self.cancel = function() {
@@ -76,13 +85,13 @@
         }
 
 
-        self.checkOut = function() { 
+        self.checkOut = function() {
 
             var food = {
                 restId: $routeParams.restKey,
                 items: self.items
             };
-            
+
             // Pop up a confirm dialog for the total price upon check out 
             if (confirm("Your total is: $" + self.total + ". Proceed to payment?") == true) {
                 /*
@@ -104,7 +113,7 @@
                 // Else alert the user and do nothing
                 alert("Order cancelled.");
             }
-            
+
         };
 
 

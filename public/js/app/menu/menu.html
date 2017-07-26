@@ -4,8 +4,8 @@
     <br><strong ng-show="!menuCtrl.restaurant">Loading...</strong>
     <h1>Menu</h1>
     <div>
-        <strong>Note: </strong>Refreshing the browser or going to a different page will erase your order list. 
-        However, in case of page reloads, the list of your previous orders is displayed for your reference.<br> 
+        <strong>Note: </strong>Reloading the browser or going to a different page will erase your order list. 
+        However, in case of page reloads, the list of your previous orders will be displayed for your reference.<br> 
         <strong>Don't worry! </strong> Your orders will not be added to the database until you proceed to the checkout.<br>
     </div>
     <p></p>
@@ -13,12 +13,13 @@
         <i class="cart icon"></i>Checkout
     </button>
     <p></p>
-    <div id="prevOrders"></div>
+    <strong>Previous orders: </strong><br>
+    <ul id="prevOrders"></ul>
     <p></p>
     <strong>Your order summary:</strong>
-    <ul>
+    <ul style="list-style: none;">
         <li ng-repeat="item in menuCtrl.items">
-            <strong>{{item.name}}</strong> -> ${{item.price}}
+            <span><i class="fa fa-trash" style="color:red;"></i></span>&nbsp; <strong>{{item.name}}</strong>: ${{item.price}}
         </li>
     </ul>
     <hr>
